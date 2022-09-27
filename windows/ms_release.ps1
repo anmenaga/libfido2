@@ -113,8 +113,8 @@ for ($i = 0; $i -lt $Architectures.Length; $i++) {
     {
         Package-Static "${OUTPUT}\${Arch}\static" `
             "${OUTPUT}\pkg\${InstallPrefix}\${Config}\static"
-        Package-StaticPDBs "${BUILD}\${Arch}\static" `
-            "${OUTPUT}\pkg\${InstallPrefix}\${Config}\static"
+        #Package-StaticPDBs "${BUILD}\${Arch}\static" `
+        #    "${OUTPUT}\pkg\${InstallPrefix}\${Config}\static"
 
         Package-StaticHeaders
     }
