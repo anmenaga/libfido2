@@ -66,6 +66,11 @@ Function Package-PDBs(${SRC}, ${DEST}) {
 }
 
 Function Package-StaticPDBs(${SRC}, ${DEST}) {
+
+	"=== Contents of ${SRC} ===" | write-verbose -verbose
+	(Get-ChildItem -Recurse -Path ${SRC}).FullName | write-verbose -verbose
+	"=== End of Contents of ${SRC} ===" | write-verbose -verbose
+
 	Copy-Item "${SRC}\${LIBCBOR}\src\Release\cbor.pdb" `
 	    "${DEST}\cbor.pdb"
 	Copy-Item "${SRC}\src\Release\fido2_static.pdb" `
