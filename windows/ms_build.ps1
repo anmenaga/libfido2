@@ -112,7 +112,11 @@ try {
 } finally {
 	Pop-Location
 }
-
+		"=== Looking for libcbor PDB files ===" | write-verbose -verbose
+		(Get-ChildItem -Recurse -Path $BUILD -Filter "*.pdb").FullName | write-verbose -verbose -ErrorAction SilentlyContinue
+		(Get-ChildItem -Recurse -Path $STAGE -Filter "*.pdb").FullName | write-verbose -verbose -ErrorAction SilentlyContinue
+		(Get-ChildItem -Recurse -Path $OUTPUT -Filter "*.pdb").FullName | write-verbose -verbose -ErrorAction SilentlyContinue
+		"=== END of Looking for libcbor PDB files ===" | write-verbose -verbose
 # Build libfido2.
 Push-Location ${STAGE}
 try {
@@ -142,3 +146,9 @@ try {
 } finally {
 	Pop-Location
 }
+
+		"=== Looking for libfido2 PDB files ===" | write-verbose -verbose
+		(Get-ChildItem -Recurse -Path $BUILD -Filter "*.pdb").FullName | write-verbose -verbose -ErrorAction SilentlyContinue
+		(Get-ChildItem -Recurse -Path $STAGE -Filter "*.pdb").FullName | write-verbose -verbose -ErrorAction SilentlyContinue
+		(Get-ChildItem -Recurse -Path $OUTPUT -Filter "*.pdb").FullName | write-verbose -verbose -ErrorAction SilentlyContinue
+		"=== END of Looking for libfido2 PDB files ===" | write-verbose -verbose
