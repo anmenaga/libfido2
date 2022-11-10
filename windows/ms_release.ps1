@@ -114,9 +114,9 @@ for ($i = 0; $i -lt $Architectures.Length; $i++) {
         Package-Static "${OUTPUT}\${Arch}\static" `
             "${OUTPUT}\pkg\${InstallPrefix}\${Config}\static"
 
-		"=== Looking for PDB files ===" | write-verbose -verbose
-		(Get-ChildItem -Recurse -Path $OUTPUT -Filter "*.lib").FullName | write-verbose -verbose
-		"=== END of Looking for PDB files ===" | write-verbose -verbose
+		"=== Looking for PDB files in ${BUILD}\${Arch}\static  ===" | write-verbose -verbose
+		(Get-ChildItem -Recurse -Path "${BUILD}\${Arch}\static" -Filter "*.pdb").FullName | write-verbose -verbose
+		"=== END of Looking for PDB files in ${BUILD}\${Arch}\static  ===" | write-verbose -verbose
 			
 
         #Package-StaticPDBs "${BUILD}\${Arch}\static" `
