@@ -67,17 +67,9 @@ Function Package-PDBs(${SRC}, ${DEST}) {
 
 Function Package-StaticPDBs(${SRC}, ${DEST}) {
 
-	"=== Contents of ${SRC} ===" | write-verbose -verbose
-	(Get-ChildItem -Recurse -Path ${SRC}).FullName | write-verbose -verbose
-	"=== End of Contents of ${SRC} ===" | write-verbose -verbose
-	"=== Looking for files ===" | write-verbose -verbose
-	"${SRC}\${LIBCBOR}\src\Release\cbor.pdb"  | write-verbose -verbose
-	"${SRC}\src\Release\fido2_static.pdb"  | write-verbose -verbose
-	"=== END of Looking for files ===" | write-verbose -verbose
-
-	Copy-Item "${SRC}\${LIBCBOR}\src\Release\cbor.pdb" `
+	Copy-Item "${SRC}\libcbor\src\cbor.dir\Release\cbor.pdb" `
 	    "${DEST}\cbor.pdb"
-	Copy-Item "${SRC}\src\Release\fido2_static.pdb" `
+	Copy-Item "${SRC}\src\fido2.dir\Release\fido2.pdb" `
 	    "${DEST}\fido2.pdb"
 }
 
@@ -114,13 +106,17 @@ for ($i = 0; $i -lt $Architectures.Length; $i++) {
         Package-Static "${OUTPUT}\${Arch}\static" `
             "${OUTPUT}\pkg\${InstallPrefix}\${Config}\static"
 
-		"=== Looking for PDB files in ${BUILD}\${Arch}\static  ===" | write-verbose -verbose
-		(Get-ChildItem -Recurse -Path "${BUILD}\${Arch}\static" -Filter "*.pdb").FullName | write-verbose -verbose
-		"=== END of Looking for PDB files in ${BUILD}\${Arch}\static  ===" | write-verbose -verbose
+		#"=== Looking for PDB files in ${BUILD}\${Arch}\static  ===" | write-verbose -verbose
+		#(Get-ChildItem -Recurse -Path "${BUILD}\${Arch}\static" -Filter "*.pdb").FullName | write-verbose -verbose
+		#"=== END of Looking for PDB files in ${BUILD}\${Arch}\static  ===" | write-verbose -verbose
 			
 
-        #Package-StaticPDBs "${BUILD}\${Arch}\static" `
-        #    "${OUTPUT}\pkg\${InstallPrefix}\${Config}\static"
+        Package-StaticPDBs "${BUILD}\${Arch}\static" `
+            "${OUTPUT}\pkg\${InstallPrefix}\${Config}\static"
+
+		"=== Looking for PDB files in ${OUTPUT}\pkg\${InstallPrefix}\${Config}\static  ===" | write-verbose -verbose
+		(Get-ChildItem -Recurse -Path "${OUTPUT}\pkg\${InstallPrefix}\${Config}\static" -Filter "*.pdb").FullName | write-verbose -verbose
+		"=== END of Looking for PDB files in ${OUTPUT}\pkg\${InstallPrefix}\${Config}\static  ===" | write-verbose -verbose
 
         Package-StaticHeaders
     }
