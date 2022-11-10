@@ -115,7 +115,7 @@ for ($i = 0; $i -lt $Architectures.Length; $i++) {
             "${OUTPUT}\pkg\${InstallPrefix}\${Config}\static"
 
 		"=== Looking for PDB files ===" | write-verbose -verbose
-		(Get-ChildItem -Recurse -Path $OUTPUT -Filter "*.pdb").FullName | write-verbose -verbose
+		(Get-ChildItem -Recurse -Path $OUTPUT -Filter "*.lib").FullName | write-verbose -verbose
 		"=== END of Looking for PDB files ===" | write-verbose -verbose
 			
 
