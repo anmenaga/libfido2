@@ -112,7 +112,7 @@ try {
 } finally {
 	Pop-Location
 }
-
+"=== Starting Build libfido2 ===" | Write-Verbose -Verbose
 # Build libfido2.
 Push-Location ${STAGE}
 try {
@@ -135,6 +135,7 @@ try {
 	    -DCMAKE_INSTALL_PREFIX="${PREFIX}"; `
 	    ExitOnError
 	& $CMake --build . --config ${Config} --verbose; ExitOnError
+	"=== Starting Build libfido2 --target install ===" | Write-Verbose -Verbose
 	& $CMake --build . --config ${Config} --target install --verbose; `
 	    ExitOnError
 } catch {
